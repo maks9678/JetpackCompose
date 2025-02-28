@@ -1,0 +1,121 @@
+Index: app/src/main/java/com/example/jetpackcompose/MainActivity.kt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.example.jetpackcompose\r\n\r\nimport android.os.Bundle\r\nimport android.util.Log\r\nimport androidx.activity.ComponentActivity\r\nimport androidx.activity.compose.setContent\r\nimport androidx.compose.foundation.Image\r\nimport androidx.compose.foundation.background\r\nimport androidx.compose.foundation.clickable\r\nimport androidx.compose.foundation.gestures.detectDragGesturesAfterLongPress\r\nimport androidx.compose.foundation.gestures.detectHorizontalDragGestures\r\nimport androidx.compose.foundation.gestures.detectTapGestures\r\nimport androidx.compose.foundation.layout.Box\r\nimport androidx.compose.foundation.layout.Column\r\nimport androidx.compose.foundation.layout.Row\r\nimport androidx.compose.foundation.layout.fillMaxHeight\r\nimport androidx.compose.foundation.layout.fillMaxSize\r\nimport androidx.compose.foundation.layout.fillMaxWidth\r\nimport androidx.compose.foundation.layout.padding\r\nimport androidx.compose.foundation.layout.size\r\nimport androidx.compose.foundation.rememberScrollState\r\nimport androidx.compose.foundation.shape.CircleShape\r\nimport androidx.compose.foundation.shape.RoundedCornerShape\r\nimport androidx.compose.foundation.verticalScroll\r\nimport androidx.compose.material3.Card\r\nimport androidx.compose.material3.CardDefaults\r\nimport androidx.compose.material3.Text\r\nimport androidx.compose.runtime.Composable\r\nimport androidx.compose.ui.Alignment\r\nimport androidx.compose.ui.Modifier\r\nimport androidx.compose.ui.draw.clip\r\nimport androidx.compose.ui.graphics.Color\r\nimport androidx.compose.ui.input.pointer.pointerInput\r\nimport androidx.compose.ui.layout.ContentScale\r\nimport androidx.compose.ui.res.painterResource\r\nimport androidx.compose.ui.unit.dp\r\n\r\nclass MainActivity : ComponentActivity() {\r\n    override fun onCreate(savedInstanceState: Bundle?) {\r\n        super.onCreate(savedInstanceState)\r\n        setContent {\r\n            Column (modifier = Modifier\r\n                .verticalScroll(rememberScrollState())\r\n            )\r\n            {//rememberScrollStaten сохраняет состояние\r\n                ListItem(\"ЖЕЛЕЗНЫЙ ЧЕЛОВЕК\", \"Филантроп\")\r\n                ListItem(\"ЖЕЛЕЗНЫЙ ЧЕЛОВЕК\", \"Филантроп\")\r\n                ListItem(\"ЖЕЛЕЗНЫЙ ЧЕЛОВЕК\", \"Филантроп\")\r\n                ListItem(\"ЖЕЛЕЗНЫЙ ЧЕЛОВЕК\", \"Филантроп\")\r\n                ListItem(\"ЖЕЛЕЗНЫЙ ЧЕЛОВЕК\", \"Филантроп\")\r\n                ListItem(\"ЖЕЛЕЗНЫЙ ЧЕЛОВЕК\", \"Филантроп\")\r\n                ListItem(\"ЖЕЛЕЗНЫЙ ЧЕЛОВЕК\", \"Филантроп\")\r\n                ListItem(\"ЖЕЛЕЗНЫЙ ЧЕЛОВЕК\", \"Филантроп\")\r\n                ListItem(\"ЖЕЛЕЗНЫЙ ЧЕЛОВЕК\", \"Филантроп\")\r\n                ListItem(\"ЖЕЛЕЗНЫЙ ЧЕЛОВЕК\", \"Филантроп\")\r\n                ListItem(\"ЖЕЛЕЗНЫЙ ЧЕЛОВЕК\", \"Филантроп\")\r\n                ListItem(\"ЖЕЛЕЗНЫЙ ЧЕЛОВЕК\", \"Филантроп\")\r\n                ListItem(\"ЖЕЛЕЗНЫЙ ЧЕЛОВЕК\", \"Филантроп\")\r\n                ListItem(\"ЖЕЛЕЗНЫЙ ЧЕЛОВЕК\", \"Филантроп\")\r\n                ListItem(\"ЖЕЛЕЗНЫЙ ЧЕЛОВЕК\", \"Филантроп\")\r\n                ListItem(\"ЖЕЛЕЗНЫЙ ЧЕЛОВЕК\", \"Филантроп\")\r\n            }\r\n        }\r\n    }\r\n}\r\n\r\n@Composable\r\nprivate fun ListItem(name: String, prof: String) {\r\n    Card(\r\n        modifier = Modifier\r\n            .fillMaxWidth()\r\n            .padding(10.dp).clickable{\r\n                Log.d(\"TAG\", \"ListItem: $name\")\r\n            }\r\n            .pointerInput(Unit){\r\n                detectHorizontalDragGestures{change,state->\r\n                    Log.d(\"TAG\",\"ListItem: $state\")\r\n                }\r\n\r\n            } // отслеживаем любые действия с элементом\r\n                 ,\r\n        shape = RoundedCornerShape(15.dp),\r\n        elevation = CardDefaults.elevatedCardElevation(5.dp)\r\n    ) {\r\n        Box(\r\n            Modifier\r\n                .fillMaxWidth(),\r\n            contentAlignment = Alignment.CenterStart\r\n        ) {\r\n            Row(verticalAlignment = Alignment.CenterVertically) {\r\n                Image(\r\n                    painter = painterResource(id = R.drawable.image),\r\n                    contentDescription = \"image\",\r\n                    contentScale = ContentScale.Crop,\r\n                    modifier = Modifier\r\n                        .padding(5.dp)\r\n                        .size(64.dp)\r\n                        .clip(CircleShape)\r\n                )\r\n                Column(modifier = Modifier.padding(start = 18.dp)) {\r\n                    Text(text = name)\r\n                    Text(text = prof)\r\n                }\r\n            }\r\n        }\r\n    }\r\n\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/example/jetpackcompose/MainActivity.kt b/app/src/main/java/com/example/jetpackcompose/MainActivity.kt
+--- a/app/src/main/java/com/example/jetpackcompose/MainActivity.kt	(revision 53d5205f1e4547186e10797163cb0a237c7697dd)
++++ b/app/src/main/java/com/example/jetpackcompose/MainActivity.kt	(date 1740753975314)
+@@ -26,59 +26,80 @@
+ import androidx.compose.material3.CardDefaults
+ import androidx.compose.material3.Text
+ import androidx.compose.runtime.Composable
++import androidx.compose.runtime.getValue
++import androidx.compose.runtime.mutableIntStateOf
++import androidx.compose.runtime.mutableStateOf
++import androidx.compose.runtime.remember
++import androidx.compose.runtime.setValue
+ import androidx.compose.ui.Alignment
+ import androidx.compose.ui.Modifier
+ import androidx.compose.ui.draw.clip
+ import androidx.compose.ui.graphics.Color
++import androidx.compose.ui.graphics.Shape
+ import androidx.compose.ui.input.pointer.pointerInput
+ import androidx.compose.ui.layout.ContentScale
+ import androidx.compose.ui.res.painterResource
++import androidx.compose.ui.text.TextStyle
+ import androidx.compose.ui.unit.dp
++import androidx.compose.ui.unit.sp
+ 
+ class MainActivity : ComponentActivity() {
+     override fun onCreate(savedInstanceState: Bundle?) {
+         super.onCreate(savedInstanceState)
+         setContent {
+-            Column (modifier = Modifier
+-                .verticalScroll(rememberScrollState())
++            Column(
+             )
+             {//rememberScrollStaten сохраняет состояние
+                 ListItem("ЖЕЛЕЗНЫЙ ЧЕЛОВЕК", "Филантроп")
+                 ListItem("ЖЕЛЕЗНЫЙ ЧЕЛОВЕК", "Филантроп")
+                 ListItem("ЖЕЛЕЗНЫЙ ЧЕЛОВЕК", "Филантроп")
+-                ListItem("ЖЕЛЕЗНЫЙ ЧЕЛОВЕК", "Филантроп")
+-                ListItem("ЖЕЛЕЗНЫЙ ЧЕЛОВЕК", "Филантроп")
+-                ListItem("ЖЕЛЕЗНЫЙ ЧЕЛОВЕК", "Филантроп")
+-                ListItem("ЖЕЛЕЗНЫЙ ЧЕЛОВЕК", "Филантроп")
+-                ListItem("ЖЕЛЕЗНЫЙ ЧЕЛОВЕК", "Филантроп")
+-                ListItem("ЖЕЛЕЗНЫЙ ЧЕЛОВЕК", "Филантроп")
+-                ListItem("ЖЕЛЕЗНЫЙ ЧЕЛОВЕК", "Филантроп")
+-                ListItem("ЖЕЛЕЗНЫЙ ЧЕЛОВЕК", "Филантроп")
+-                ListItem("ЖЕЛЕЗНЫЙ ЧЕЛОВЕК", "Филантроп")
+-                ListItem("ЖЕЛЕЗНЫЙ ЧЕЛОВЕК", "Филантроп")
+-                ListItem("ЖЕЛЕЗНЫЙ ЧЕЛОВЕК", "Филантроп")
+-                ListItem("ЖЕЛЕЗНЫЙ ЧЕЛОВЕК", "Филантроп")
+-                ListItem("ЖЕЛЕЗНЫЙ ЧЕЛОВЕК", "Филантроп")
++                Button()
+             }
+         }
+     }
+ }
++
++@Composable
++private fun Button() {
++    var counter by remember { mutableIntStateOf(0) }
++    var color by remember { mutableStateOf(Color.Blue) }
++    Box(
++        modifier = Modifier
++            .size(100.dp)
++            .background(
++                color, shape = CircleShape
++            )
++            .clickable{
++                when(++counter){
++               10-> color=Color.Green
++               20-> color=Color.Red}
++            },
++        contentAlignment = Alignment.Center,
++
++    ) {
++        Text(text = counter.toString(), style = TextStyle(color=Color.Yellow, fontSize = 20.sp))
++    }
++}
++
+ 
+ @Composable
+ private fun ListItem(name: String, prof: String) {
++    var counter by remember { mutableIntStateOf(0) }
+     Card(
+         modifier = Modifier
+             .fillMaxWidth()
+-            .padding(10.dp).clickable{
+-                Log.d("TAG", "ListItem: $name")
++            .padding(10.dp)
++            .clickable {
++                counter++
++                Log.d("TAG", "ListItem: $counter")
+             }
+-            .pointerInput(Unit){
+-                detectHorizontalDragGestures{change,state->
+-                    Log.d("TAG","ListItem: $state")
++            .pointerInput(Unit) {
++                detectHorizontalDragGestures { change, state ->
++                    Log.d("TAG", "ListItem: $state")
+                 }
+ 
+             } // отслеживаем любые действия с элементом
+-                 ,
++        ,
+         shape = RoundedCornerShape(15.dp),
+         elevation = CardDefaults.elevatedCardElevation(5.dp)
+     ) {
+@@ -98,7 +119,7 @@
+                         .clip(CircleShape)
+                 )
+                 Column(modifier = Modifier.padding(start = 18.dp)) {
+-                    Text(text = name)
++                    Text(text = counter.toString())
+                     Text(text = prof)
+                 }
+             }
